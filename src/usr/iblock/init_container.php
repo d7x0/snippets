@@ -86,7 +86,7 @@ $field = [
     ],
     [
         'FIELD_ID'      => 'IBLOCK_SECTION',
-        'IS_REQUIRED'   => 'Y',
+        'IS_REQUIRED'   => 'N', // Привязка к разделам Y - включена, N - отключена
         'DEFAULT_VALUE' => 'a:1:{s:22:"KEEP_IBLOCK_SECTION_ID";s:1:"N";}',
     ],
     [
@@ -251,7 +251,11 @@ $data = [
                         'GROUP_ID'   => 2,
                         'PERMISSION' => 'R',
                     ],
-                ]
+                ],
+                'WORKFLOW'  => 'N',
+                'LIST_MODE' => '',
+                'SECTION_PROPERTY' => 'N',
+                'PROPERTY_INDEX'   => 'N',
             ],
             'PROPERTY' => [
                 [
@@ -289,7 +293,11 @@ $data = [
                         'GROUP_ID'   => 2,
                         'PERMISSION' => 'R',
                     ],
-                ]
+                ],
+                'WORKFLOW'  => 'N',
+                'LIST_MODE' => '',
+                'SECTION_PROPERTY' => 'N',
+                'PROPERTY_INDEX'   => 'N',
             ],
             'PROPERTY' => [
                 [

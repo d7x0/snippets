@@ -1,26 +1,38 @@
 <?php Bitrix\Main\Loader::includeModule("iblock");
 
+
 use Bitrix\Iblock\TypeTable;
 use Bitrix\Iblock\TypeLanguageTable;
+use Bitrix\Iblock\ElementTable;
 use Bitrix\Iblock\IblockTable;
+use Bitrix\Iblock\IblockSiteTable;
+use Bitrix\Iblock\IblockFieldTable;
+use Bitrix\Iblock\IblockMessageTable;
+use Bitrix\Iblock\IblockGroupTable;
+use Unlock\Iblock\ElementUnlockedTable;
 
-// add type
-$tta1 = TypeTable::createObject();
-$tta1result =  $tta1->setId('contragent')
-    ->save();
 
-// add type lang
-$tlta11 = TypeLanguageTable::createObject();
-$tlta1result1 =  $tlta11->setIblockTypeId('contragent')
-    ->setLanguageId('ru')
-    ->setName('Контрагенты')
-    ->save();
+$d = $data;
+$dt = $data['type'];        // list
+$de = $data['element'];     // list
 
-// add container
-$ita1 = IblockTable::createObject();
-$ita1result =  $ita1->setIblockTypeId('catalog')
-    ->setLid('s1')
-    ->setCode('computers')
-    ->setName('Компьютеры')
-    ->save();
+
+$itqex1 = IblockTable::query()
+    ->setFilter(['CODE' => $dt['CODE']])
+    ->setSelect(['ID']);
+$itqex1result1 = $itqex1->exec()->fetch();
+$iblockId = $itqex1result1['ID'];
+
+
+$dee = $de['element'];
+
+foreach ($de['list'] as $element)
+{
+    $eta1 = ElementUnlockedTable::createObject();
+    $eta1result = $eta1 ->setTimestampX(new \Bitrix\Main\Type\DateTime())
+        ->setIblockId($iblockId)
+        ->setName($element['NAME'])
+        ->save();
+}
+
 

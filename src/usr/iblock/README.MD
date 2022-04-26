@@ -72,7 +72,6 @@ php exec.php \
 
 ```shell
 php exec.php \
-    --moduleName "iblock" \ 
-    --apiType "new" \
+    --moduleName "iblock" --apiType "new" \
     --pathToData "usr/iblock/init_element.php"
 ```

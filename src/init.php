@@ -25,3 +25,6 @@ set_time_limit(0);
 while (ob_get_level()) { /* цикл, который сбросит все буферы */
     ob_end_flush();
 }
+
+
+require_once 'lib/iblock/ElementTableUnlocked.php';

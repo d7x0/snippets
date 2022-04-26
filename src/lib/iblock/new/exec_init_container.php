@@ -54,6 +54,10 @@ foreach ($dt as $dtdata)
             ->setName($dcdata['NAME'])
             ->setLid($dcdata['SETTINGS']['SITE_ID'])
             ->setActive($dcdata['SETTINGS']['ACTIVE'])
+            ->setWorkflow($dcdata['SETTINGS']['WORKFLOW'])
+            ->setListMode($dcdata['SETTINGS']['LIST_MODE'])
+            ->setSectionProperty($dcdata['SETTINGS']['SECTION_PROPERTY'])
+            ->setPropertyIndex($dcdata['SETTINGS']['PROPERTY_INDEX'])
             ->save();
         $iblockId = $ita1result->getId();                                   // get iblock id
 
