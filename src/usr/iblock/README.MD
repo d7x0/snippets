@@ -34,9 +34,9 @@ php exec.php \
 
 ```shell
 php exec.php \
-	--moduleName "iblock" \ 
-	--apiType "new" \
-	--pathToData "usr/iblock/init_element.php"
+    --moduleName "iblock" \ 
+    --apiType "new" \
+    --pathToData "usr/iblock/init_element.php"
 ```
 
 ## Update
@@ -45,16 +45,16 @@ php exec.php \
 
 ```shell
 php exec.php \
-	--moduleName "iblock" \ 
-	--apiType "new" \
-	--pathToData "usr/iblock/init_container.php"
+    --moduleName "iblock" \ 
+    --apiType "new" \
+    --pathToData "usr/iblock/init_container.php"
 ```
 
 **Element**
 
 ```shell
 php exec.php \
-	--moduleName "iblock" \ 
-	--apiType "new" \
-	--pathToData "usr/iblock/init_element.php"
+    --moduleName "iblock" \ 
+    --apiType "new" \
+    --pathToData "usr/iblock/init_element.php"
 ```

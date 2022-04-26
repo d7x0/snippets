@@ -7,13 +7,16 @@ require_once("init.php");
 
 
 $options = getopt('ptc:ptd:', array(
-    'pathToFile:'
+    'moduleName:',
+    'apiType:',
+    'pathToData:',
 ));
 
-$pathinfo = pathinfo($options['pathToFile']);
 
-$pathInitFolder = substr($pathinfo['dirname'], 0 , -4);
-$pathInit = $pathInitFolder . DIRECTORY_SEPARATOR . 'init.php';
+$nameExec = substr($options['pathToData'], strripos($options['pathToData'], "/") + 1);
+$pathExec = "lib" . DIRECTORY_SEPARATOR . $options['moduleName']
+                  . DIRECTORY_SEPARATOR . $options['apiType']
+                  . DIRECTORY_SEPARATOR . "exec_" . $nameExec;
 
-//require_once $pathInit;
-require_once $options['pathToFile'];
+require_once $options['pathToData'];
+require_once $pathExec;
