@@ -25,9 +25,9 @@ Execute command:
 
 ```shell
 php exec.php \
-	--moduleName "iblock" \ 
-	--apiType "new" \
-	--pathToData "usr/iblock/init_container.php"
+    --moduleName "iblock" \
+    --apiType "new" \
+    --pathToData "usr/iblock/init_container.php"
 ```
 
 **Element**
