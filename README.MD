@@ -2,4 +2,4 @@
 
 ### Content
 
-* [Iblock snippets](/)
+* [Iblock snippets](/src/usr/iblock)
