@@ -6,6 +6,8 @@ use Bitrix\Iblock\TypeLanguageTable;
 use Bitrix\Iblock\IblockTable;
 use Bitrix\Iblock\IblockSiteTable;
 use Bitrix\Iblock\IblockFieldTable;
+use Bitrix\Iblock\IblockMessageTable;
+use Bitrix\Iblock\IblockGroupTable;
 
 
 $d = $data;
@@ -13,7 +15,6 @@ $dt = $data['type'];        // list
 $dc = $data['container'];   // list
 
 
-// add type lang
 foreach ($dt as $dtdata)
 {
     $ttqex1 = TypeTable::query()
@@ -62,7 +63,7 @@ foreach ($dt as $dtdata)
             ->setSiteId($dcdata['SETTINGS']['SITE_ID'])
             ->save();
 
-        // add field in b_iblock_fields
+        // init field in b_iblock_fields
         foreach ($dcdata['FIELD'] as $dcfield)
         {
             $pta1 = IblockFieldTable::createObject();
@@ -70,6 +71,26 @@ foreach ($dt as $dtdata)
                 ->setFieldId($dcfield['FIELD_ID'])
                 ->setIsRequired($dcfield['IS_REQUIRED'])
                 ->setDefaultValue($dcfield['DEFAULT_VALUE'])
+                ->save();
+        }
+
+        // init message in b_iblock_messages
+        foreach ($dcdata['MESSAGE'] as $dcmessage)
+        {
+            $imta1  = IblockMessageTable::createObject();
+            $imta1  ->setIblockId($iblockId)
+                ->setMessageId($dcmessage['MESSAGE_ID'])
+                ->setMessageText($dcmessage['MESSAGE_TEXT'])
+                ->save();
+        }
+
+        // init permission in b_iblock_group
+        foreach ($dcdata['SETTINGS']['GROUP'] as $dcgroup)
+        {
+            $igta1 = IblockGroupTable::createObject();
+            $igta1result =  $igta1->setIblockId($iblockId)
+                ->setGroupId($dcgroup['GROUP_ID'])
+                ->setPermission($dcgroup['PERMISSION'])
                 ->save();
         }
     }
