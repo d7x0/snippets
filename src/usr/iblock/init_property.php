@@ -17,12 +17,21 @@ class Data
                 'list' => [
                     [   // element 1
                         'NAME' => 'Минимальная сумма заказа',
-                        'CODE' => 'COST_MINIMUM',
+                        'CODE' => 'ORDER_COST_MINIMUM',
                     ],  // element 1
                     [   // element 2
                         'NAME' => 'Время изготовления заказа',
                         'CODE' => 'ORDER_MUNUFACTURE_TIME',
                     ],  // element 2
+                    [   // element 3
+                        'NAME' => 'Форма оплаты',
+                        'CODE' => 'PAYMENT_TYPE',
+                        'PROPERTY_TYPE' => 'L',
+                    ],  // element 3
+                    [   // element 4
+                        'NAME' => 'Банк оплаты',
+                        'CODE' => 'PAYMENT_BANK',
+                    ],  // element 4
                 ]
             ]
         ]

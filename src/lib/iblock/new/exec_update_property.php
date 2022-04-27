@@ -3,6 +3,7 @@
 
 use Bitrix\Iblock\IblockTable;
 use Bitrix\Iblock\PropertyTable;
+use Bitrix\Iblock\PropertyEnumerationTable;
 
 
 $data = Customer\Data::DATA;
@@ -19,7 +20,7 @@ $iblockId = $itqex1result1['ID'];
 
 $ptqex1 = PropertyTable::query()
     ->setFilter(['IBLOCK_ID' => $iblockId])
-    ->setSelect(['CODE']);
+    ->setSelect(['CODE', 'ID']);
 $ptqex1result1 = $ptqex1->exec();
 
 
@@ -27,28 +28,22 @@ $ptqex1data  = [];
 $ptqex1count = 0;
 while ($ptqex1row = $ptqex1result1->fetch())
 {
-    array_push($ptqex1data, $ptqex1row['CODE']);
+    $ptqex1data[$ptqex1row['CODE']] = $ptqex1row['ID'];
     $ptqex1count++;
 }
 
     $p = $container['PROPERTY']['property'];
 foreach ($container['PROPERTY']['list'] as $property)
 {
-    if(in_array($property['CODE'], $ptqex1data))
+    foreach($property['SETTINGS']['PROPERTY_ENUM'] as $propenum)
     {
-        continue;
+        $xmlId = md5($property['CODE'] . $propenum['VALUE']);
+        $petaex1result  = PropertyEnumerationTable::createObject()
+            ->setPropertyId($ptqex1data[$property['CODE']])
+            ->setSort($propenum['SORT'])
+            ->setDef($propenum['DEF'])
+            ->setValue($propenum['VALUE'])
+            ->setXmlId($xmlId)
+            ->save();
     }
-
-    if(array_key_exists('PROPERTY_TYPE', $property))
-    {
-        $p['PROPERTY_TYPE'] = $property['PROPERTY_TYPE'];
-    }
-
-    $pta1 = PropertyTable::createObject();
-    $pta1result =  $pta1->setIblockId($iblockId)
-        ->setName($property['NAME'])
-        ->setCode($property['CODE'])
-        ->setActive($p['ACTIVE'])
-        ->setPropertyType($p['PROPERTY_TYPE'])
-        ->save();
 }

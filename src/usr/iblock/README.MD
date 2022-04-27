@@ -57,13 +57,12 @@ php exec.php \
 
 ## Update
 
-**Container**
+**Property**
 
 ```shell
 php exec.php \
-    --moduleName "iblock" \ 
-    --apiType "new" \
-    --pathToData "usr/iblock/init_container.php"
+    --moduleName "iblock" --apiType "new" \
+    --pathToData "usr/iblock/update_property.php"
 ```
 
 **Element**
@@ -71,5 +70,5 @@ php exec.php \
 ```shell
 php exec.php \
     --moduleName "iblock" --apiType "new" \
-    --pathToData "usr/iblock/init_element.php"
+    --pathToData "usr/iblock/update_element.php"
 ```
