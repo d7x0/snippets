@@ -2,6 +2,7 @@
 
 
 use Bitrix\Iblock\IblockTable;
+use Bitrix\Iblock\ElementPropertyTable;
 use Unlock\Iblock\ElementUnlockedTable;
 
 
@@ -33,10 +34,24 @@ while ($etqex1row = $etqex1result1->fetch())
     array_push($idListElement, $etqex1row['ID']);           // get element id
 }
 
+$idListElementProperty = [];
+$eptglex1epq = ElementPropertyTable::query()
+    ->setFilter(['IBLOCK_ELEMENT_ID' => $idListElement])
+    ->setSelect(['ID'])
+    ->exec();
+while ($eptglex1eprow = $eptglex1epq->fetch())
+{
+    array_push($idListElementProperty, $eptglex1eprow['ID']);           // get element property id
+}
+
+
+foreach ($idListElementProperty as $id)
+{
+    $itu1result = ElementPropertyTable::getByPrimary($id)->fetchObject()->delete();
+}
+
 foreach ($idListElement as $id)
 {
-    $itu1result = ElementUnlockedTable::getByPrimary($id)->fetchObject();
-
-    if(!is_null($itu1result)) { $itu1result->delete(); }
+    $itu1result = ElementUnlockedTable::getByPrimary($id)->fetchObject()->delete();
 }
 

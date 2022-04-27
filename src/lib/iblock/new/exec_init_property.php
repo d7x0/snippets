@@ -16,42 +16,39 @@ $itqex1 = IblockTable::query()
     ->setFilter(['CODE' => $container['CODE']])
     ->setSelect(['ID']);
 $itqex1result1 = $itqex1->exec()->fetch();
-$iblockId = $itqex1result1['ID'];
-
-
-$ptqex1 = PropertyTable::query()
-    ->setFilter(['IBLOCK_ID' => $iblockId])
-    ->setSelect(['CODE']);
-$ptqex1result1 = $ptqex1->exec();
+$iblockId = $itqex1result1['ID'];                               // get iblock id
 
 
 $ptqex1data  = [];
-$ptqex1count = 0;
-while ($ptqex1row = $ptqex1result1->fetch())
+$ptqex1q = PropertyTable::query()
+    ->setFilter(['IBLOCK_ID' => $iblockId])
+    ->setSelect(['CODE'])->exec();
+while ($ptqex1row = $ptqex1q->fetch())
 {
     array_push($ptqex1data, $ptqex1row['CODE']);
-    $ptqex1count++;
 }
 
-    $p = $container['PROPERTY']['property'];
+    $propdefault
+       = $container['PROPERTY']['default'];
 foreach ($container['PROPERTY']['list'] as $property)
 {
     if(in_array($property['CODE'], $ptqex1data))
-    {
+    {   // if property exist in db, continue
         continue;
     }
 
-    if(array_key_exists('PROPERTY_TYPE', $property))
-    {
-        $p['PROPERTY_TYPE'] = $property['PROPERTY_TYPE'];
-    }
+    $proptype = array_key_exists('PROPERTY_TYPE', $property)
+        ? $property['PROPERTY_TYPE'] : $propdefault['PROPERTY_TYPE'];
+    $property['PROPERTY_TYPE'] = $proptype;
+    $property['ACTIVE'] = $propdefault['ACTIVE'];
+
 
     $pta1 = PropertyTable::createObject();
     $pta1result =  $pta1->setIblockId($iblockId)
         ->setName($property['NAME'])
         ->setCode($property['CODE'])
-        ->setActive($p['ACTIVE'])
-        ->setPropertyType($p['PROPERTY_TYPE'])
+        ->setActive($property['ACTIVE'])
+        ->setPropertyType($property['PROPERTY_TYPE'])
         ->save();
     $ptid = $pta1->getId();
 

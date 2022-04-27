@@ -10,7 +10,7 @@ class Data
         'container' => [
             'CODE' => 'supplier-steel',
             'PROPERTY' => [
-                'property' => [
+                'default' => [
                     'ACTIVE'        => 'Y',
                     'PROPERTY_TYPE' => 'S',
                 ],

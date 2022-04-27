@@ -11,12 +11,12 @@ class Data
             'CODE' => 'supplier-steel',
         ],
         'element' => [
-            'element' => [
+            'default' => [
 
             ],
             'list' => [
                 [   // element 1
-                    'ID'       => 354,
+                    'ID'       => 'ELEMENT_ID',
                     'PROPERTY' => [
                         'PAYMENT_TYPE' => 'PAYMENT_TYPE_CARD',
                         'PAYMENT_BANK' => 'ПАО Банк «ФК Oткpытиe»'

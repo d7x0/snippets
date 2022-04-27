@@ -31,10 +31,16 @@ while ($ptqex1row = $ptqex1result1->fetch())
     $ptqex1data[$ptqex1row['CODE']] = $ptqex1row;               // get iblock property
 }
 
-
-    $e = $element['element'];
+$eldefault
+       = $element['default'];
 foreach ($element['list'] as $el)
 {
+    if(is_string($el['ID']))
+    {
+        dump('ID must ba a Integer type, check DATA constant');
+        break;
+    }
+
     // get enum id
     $eptglex1pres = [];
     $eptglex1prq = ElementPropertyTable::getList([
@@ -51,7 +57,7 @@ foreach ($element['list'] as $el)
     $petglex1   = PropertyEnumerationTable::query();
     $petglex1   ->setFilter(['PROPERTY_ID' => array_keys($eptglex1pres)])
                 ->setSelect(['ID', 'PROPERTY_ID', 'VALUE']);
-    $petglex1q         = $petglex1->exec();
+    $petglex1q  = $petglex1->exec();
     while($petglex1row = $petglex1q->fetch())
     {
         $petglex1res[$petglex1row['PROPERTY_ID']][$petglex1row['VALUE']] = $petglex1row['ID'];
@@ -59,24 +65,56 @@ foreach ($element['list'] as $el)
 
     foreach ($el['PROPERTY'] as $elpropertycode => $elpropertyvalue)
     {
-        $elPrId = $eptglex1pres[$ptqex1data[$elpropertycode]['ID']];
+        $elPrId              = empty($eptglex1pres) ? null : $eptglex1pres[$ptqex1data[$elpropertycode]['ID']];
+        $elpropertyvalueEnum = empty($petglex1res)  ? null : $petglex1res[$ptqex1data[$elpropertycode]['ID']][$elpropertyvalue];
+
 
         if($ptqex1data[$elpropertycode]['PROPERTY_TYPE'] == 'S')
         {
-            $itu1 = ElementPropertyTable::getByPrimary($elPrId)->fetchObject();
-            $itu1result = $itu1 ->setValue($elpropertyvalue)
-                                ->setEnum(null)
-                                ->save();
+            if(is_null($elPrId))
+            {
+                $itu1 = ElementPropertyTable::createObject();
+                $itu1result = $itu1 ->setIblockElementId($el['ID'])
+                                    ->setIblockPropertyId($ptqex1data[$elpropertycode]['ID'])
+                                    ->setValue($elpropertyvalue)
+                                    ->setValueEnum(null)
+                                    ->save();
+            }
+            else
+            {
+                $itu1 = ElementPropertyTable::getByPrimary($elPrId)->fetchObject();
+                $itu1result = $itu1 ->setValue($elpropertyvalue)
+                                    ->setValueEnum(null)
+                                    ->save();
+            }
         }
 
         if($ptqex1data[$elpropertycode]['PROPERTY_TYPE'] == 'L')
         {
-            $elpropertyvalueEnum = $petglex1res[$ptqex1data[$elpropertycode]['ID']][$elpropertyvalue];
+            if(is_null($elPrId))
+            {
+                // get $elpropertyvalueEnum by value
+                $petglex1   = PropertyEnumerationTable::query();
+                $petglex1  ->setFilter(['VALUE' => $elpropertyvalue])
+                            ->setSelect(['ID']);
+                $petglex1res = $petglex1->exec()->fetch();
+                $elpropertyvalueEnum = $petglex1res['ID'];
 
-            $itu1 = ElementPropertyTable::getByPrimary($elPrId)->fetchObject();
-            $itu1result = $itu1 ->setValue($elpropertyvalueEnum)
-                                ->setValueEnum($elpropertyvalueEnum)
-                                ->save();
+                $itu1 = ElementPropertyTable::createObject();
+                $itu1result = $itu1 ->setIblockElementId($el['ID'])
+                                    ->setIblockPropertyId($ptqex1data[$elpropertycode]['ID'])
+                                    ->setValue($elpropertyvalueEnum)
+                                    ->setValueEnum($elpropertyvalueEnum)
+                                    ->save();
+            }
+            else
+            {
+                $itu1 = ElementPropertyTable::getByPrimary($elPrId)->fetchObject();
+                $itu1result = $itu1 ->setValue($elpropertyvalueEnum)
+                                    ->setValueEnum($elpropertyvalueEnum)
+                                    ->save();
+            }
+
         }
     }
 }

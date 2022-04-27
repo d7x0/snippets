@@ -61,7 +61,7 @@ while($ptqex1pfrow = $ptqex1pfq->fetch())
 
 $idListSectionProperty = [];
 $ptqex1spq = SectionPropertyTable::query()
-    ->setFilter(['PROPERTY_ID' => [55,56,57,58]])        // $idListProperty
+    ->setFilter(['PROPERTY_ID' => $idListProperty])
     ->setSelect(['IBLOCK_ID', 'SECTION_ID', 'PROPERTY_ID'])
     ->exec();
 while($ptqex1spqrow = $ptqex1spq->fetch())
