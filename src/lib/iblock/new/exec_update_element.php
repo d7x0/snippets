@@ -31,8 +31,27 @@ while ($ptqex1row = $ptqex1result1->fetch())
     $ptqex1data[$ptqex1row['CODE']] = $ptqex1row;               // get iblock property
 }
 
+
 $eldefault
-       = $element['default'];
+    = $element['default'];
+
+if($eldefault['parameters']['SET_PROPERTY_FOR_ALL_EXIST_ELEMENT'] == 'Y')
+{
+    $element['list'] = [];
+    $idListElement   = [];
+    $etqex1 = ElementUnlockedTable::query()
+        ->setFilter(['IBLOCK_ID' => $iblockId])
+        ->setSelect(['ID']);
+    $etqex1result1 = $etqex1->exec();
+    while ($etqex1row = $etqex1result1->fetch())
+    {
+        array_push($element['list'], [
+            'ID'       => intval($etqex1row['ID']),
+            'PROPERTY' => $eldefault['PROPERTY']
+        ]);
+    }
+}
+
 foreach ($element['list'] as $el)
 {
     if(is_string($el['ID']))
@@ -63,11 +82,11 @@ foreach ($element['list'] as $el)
         $petglex1res[$petglex1row['PROPERTY_ID']][$petglex1row['VALUE']] = $petglex1row['ID'];
     }
 
+
     foreach ($el['PROPERTY'] as $elpropertycode => $elpropertyvalue)
     {
         $elPrId              = empty($eptglex1pres) ? null : $eptglex1pres[$ptqex1data[$elpropertycode]['ID']];
         $elpropertyvalueEnum = empty($petglex1res)  ? null : $petglex1res[$ptqex1data[$elpropertycode]['ID']][$elpropertyvalue];
-
 
         if($ptqex1data[$elpropertycode]['PROPERTY_TYPE'] == 'S')
         {
