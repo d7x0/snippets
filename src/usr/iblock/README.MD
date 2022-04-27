@@ -72,3 +72,22 @@ php exec.php \
     --moduleName "iblock" --apiType "new" \
     --pathToData "usr/iblock/update_element.php"
 ```
+
+## Delete
+
+**Property**
+
+```shell
+php exec.php \
+    --moduleName "iblock" --apiType "new" \
+    --pathToData "usr/iblock/delete_property.php"
+```
+
+**Element**
+
+```shell
+php exec.php \
+    --moduleName "iblock" --apiType "new" \
+    --pathToData "usr/iblock/delete_element.php"
+```
+
