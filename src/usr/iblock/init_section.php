@@ -1,4 +1,4 @@
-<?php // data for init element
+<?php // data for init section
 
 
 namespace Customer;
@@ -7,25 +7,29 @@ namespace Customer;
 class Data
 {
     const DATA = [
-        'type'    => [
+        'container'    => [
             'CODE' => 'supplier-steel'
         ],
-        'element' => [
+        'section' => [
             'element' => [
-                'IN_SECTIOINS' => 'N',
+                'ACTIVE' => 'Y',
             ],
             'list' => [
                 [   // element 1
-                    'NAME' => 'Уральская литейная компания',
+                    'NAME' => 'Европа',
+                    'CODE' => 'europe',
                 ],  // element 1
                 [   // element 2
-                    'NAME' => 'ООО "Новые Композитные Технологии"',
+                    'NAME' => 'Урал',
+                    'CODE' => 'ural',
                 ],  // element 2
                 [   // element 3
-                    'NAME' => 'ООО "ФЕРУС НОВОСИБИРСК"',
+                    'NAME' => 'Сибирь',
+                    'CODE' => 'siberia',
                 ],  // element 3
                 [   // element 4
-                    'NAME' => 'ООО "ЛАЗЕРВЕРК"',
+                    'NAME' => 'Восток',
+                    'CODE' => 'east',
                 ],  // element 4
             ]
         ]
