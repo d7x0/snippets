@@ -26,6 +26,7 @@ foreach ($element['list'] as $el)
     $eta1result = $eta1 ->setTimestampX(new \Bitrix\Main\Type\DateTime())
         ->setIblockId($iblockId)
         ->setName($el['NAME'])
+        ->setCode($el['CODE'])
         ->save();
 }
 

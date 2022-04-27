@@ -6,6 +6,7 @@ use Bitrix\Iblock\PropertyTable;
 use Bitrix\Iblock\ElementPropertyTable;
 use Bitrix\Iblock\PropertyEnumerationTable;
 use Bitrix\Iblock\PropertyFeatureTable;
+use Bitrix\Iblock\SectionPropertyTable;
 
 
 $data = Customer\Data::DATA;
@@ -58,6 +59,16 @@ while($ptqex1pfrow = $ptqex1pfq->fetch())
 }
 
 
+$idListSectionProperty = [];
+$ptqex1spq = SectionPropertyTable::query()
+    ->setFilter(['PROPERTY_ID' => [55,56,57,58]])        // $idListProperty
+    ->setSelect(['IBLOCK_ID', 'SECTION_ID', 'PROPERTY_ID'])
+    ->exec();
+while($ptqex1spqrow = $ptqex1spq->fetch())
+{
+    array_push($idListSectionProperty, $ptqex1spqrow);      // get property feature id
+}
+
 $idListElementProperty = [];
 $eptglex1prq = ElementPropertyTable::query()
     ->setFilter(['IBLOCK_PROPERTY_ID' => $idListProperty])
@@ -89,9 +100,18 @@ foreach ($idListPropertyFeature as $id)
     $ptd1 = PropertyFeatureTable::getByPrimary($id)->fetchObject()->delete();
 }
 
+foreach ($idListSectionProperty as $id)
+{
+    $ptd1 = SectionPropertyTable::getByPrimary([
+        'IBLOCK_ID'     => $id['IBLOCK_ID'],
+        'SECTION_ID'    => $id['SECTION_ID'],
+        'PROPERTY_ID'   => $id['PROPERTY_ID'],
+    ])->fetchObject();
+    $ptd1result = $ptd1->delete();
+}
+
 foreach ($idListProperty as $id)
 {
     $ptd1 = PropertyTable::getByPrimary($id)->fetchObject()->delete();
 }
-
 

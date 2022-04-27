@@ -3,6 +3,8 @@
 
 use Bitrix\Iblock\IblockTable;
 use Bitrix\Iblock\PropertyTable;
+use Bitrix\Iblock\PropertyFeatureTable;
+use Bitrix\Iblock\SectionPropertyTable;
 
 
 $data = Customer\Data::DATA;
@@ -50,5 +52,31 @@ foreach ($container['PROPERTY']['list'] as $property)
         ->setCode($property['CODE'])
         ->setActive($p['ACTIVE'])
         ->setPropertyType($p['PROPERTY_TYPE'])
+        ->save();
+    $ptid = $pta1->getId();
+
+
+    $ptfa1 = PropertyFeatureTable::createObject();
+    $ptfa1result =  $ptfa1->setPropertyId($ptid)
+        ->setModuleId('iblock')
+        ->setFeatureId('LIST_PAGE_SHOW')
+        ->setIsEnabled('N')
+        ->save();
+    $ptfa2 = PropertyFeatureTable::createObject();
+    $ptfa2result =  $ptfa2->setPropertyId($ptid)
+        ->setModuleId('iblock')
+        ->setFeatureId('DETAIL_PAGE_SHOW')
+        ->setIsEnabled('N')
+        ->save();
+
+
+    $pta1 = SectionPropertyTable::createObject();
+    $pta1result =  $pta1->setIblockId($iblockId)
+        ->setSectionId(0)
+        ->setPropertyId($ptid)
+        ->setSmartFilter('Y')
+        ->setDisplayType('F')
+        ->setDisplayExpanded('N')
+        ->setFilterHint('')
         ->save();
 }
