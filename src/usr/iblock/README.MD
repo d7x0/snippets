@@ -18,6 +18,8 @@ Execute command:
 * Delete
 * Fetch
 
+View [new](/src/lib/iblock/new), [old](/src/lib/iblock/old) API code
+
 
 ## Init
 
