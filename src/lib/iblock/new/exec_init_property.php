@@ -33,7 +33,9 @@ while ($ptqex1row = $ptqex1q->fetch())
 foreach ($container['PROPERTY']['list'] as $property)
 {
     if(in_array($property['CODE'], $ptqex1data))
-    {   // if property exist in db, continue
+    {
+        dump('Property with ID: "' . $property['CODE'] . '" already exist');
+        dump('Property not created');
         continue;
     }
 
