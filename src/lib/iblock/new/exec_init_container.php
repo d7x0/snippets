@@ -25,17 +25,18 @@ foreach ($type as $t)
 
     if($ttqex1result1['ID'] == $t['ID'])                               // check type iblock id
     {
-        dump('break for: ' . $ttqex1result1['ID']);
-        break;
+        dump('Type with ID: "' . $ttqex1result1['ID'] . '" already exist');
+        dump('Type not created');
     }
-
-    // init type in b_iblock_type
-    $tta1 = TypeTable::createObject();
-    $tta1result  = $tta1->setId($t['ID'])
-                        ->save();
-
-    foreach ($t['LANG'] as $langId => $lang)
+    else
     {
+        // init type
+        $tta1 = TypeTable::createObject();
+        $tta1result  = $tta1->setId($t['ID'])
+            ->save();
+        // init type lang
+        foreach ($t['LANG'] as $langId => $lang)
+        {
             // init type lang in b_iblock_type_lang
             $tlta11 = TypeLanguageTable::createObject();
             $tlta1result1 =  $tlta11->setIblockTypeId($t['ID'])
@@ -44,10 +45,24 @@ foreach ($type as $t)
                 ->setElementsName($lang['ELEMENT_NAME'])
                 ->setSectionsName($lang['SECTION_NAME'])
                 ->save();
+        }
     }
 
     foreach ($container as $c)
     {
+        $itqex1q = IblockTable::query()
+            ->setFilter(['CODE' => $c['CODE']])
+            ->setSelect(['CODE', 'ID'])
+            ->exec();
+        $itqex1res = $itqex1q->fetch();
+
+        if($itqex1res['CODE'] == $c['CODE'])
+        {
+            dump('Container with ID: "' . $itqex1res['CODE'] . '" already exist');
+            dump('Container not created');
+            continue;
+        }
+
         // init container in b_iblock
         $ita1 = IblockTable::createObject();
         $ita1result =  $ita1->setIblockTypeId($t['ID'])
@@ -100,7 +115,3 @@ foreach ($type as $t)
         }
     }
 }
-
-
-
-

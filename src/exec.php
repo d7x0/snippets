@@ -13,10 +13,15 @@ $options = getopt('ptc:ptd:', array(
 ));
 
 
-$nameExec = substr($options['pathToData'], strripos($options['pathToData'], "/") + 1);
+$nameFileData = substr($options['pathToData'], strripos($options['pathToData'], DIRECTORY_SEPARATOR) + 1);
+$nameFileAPI = substr_count($options['pathToData'], "_") == 2
+    ? substr($nameFileData, 0, strripos($nameFileData, "_")) . ".php"
+    : $nameFileData;
+
+
 $pathExec = "lib" . DIRECTORY_SEPARATOR . $options['moduleName']
                   . DIRECTORY_SEPARATOR . $options['apiType']
-                  . DIRECTORY_SEPARATOR . "exec_" . $nameExec;
+                  . DIRECTORY_SEPARATOR . "exec_" . $nameFileAPI;
 
 if(count($options) < 3)
 {
@@ -24,5 +29,9 @@ if(count($options) < 3)
     die;
 }
 
-require_once $options['pathToData'];
+$pathToData = trim($options['pathToData']);
+$pathExec   = trim($pathExec);
+
+
+require_once $pathToData;
 require_once $pathExec;
