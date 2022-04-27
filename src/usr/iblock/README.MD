@@ -3,7 +3,11 @@
 
 # Iblock snippets
 
-Change directory:
+View [new](/src/lib/iblock/new), [old](/src/lib/iblock/old) API code
+
+## Get started
+
+1. Change directory:
 
 ```shell
 $ cd /path/to/snippets/src
@@ -11,15 +15,15 @@ $ ls
 exec.php        init.php        lib             usr
 ```
 
-Execute command:
+2. Execute command:
 
-* Init
-* Update
-* Delete
-* Fetch
+```shell
+php exec.php \
+    --moduleName "iblock" --apiType "new" \
+    ....
+```
 
-View [new](/src/lib/iblock/new), [old](/src/lib/iblock/old) API code
-
+# Command
 
 ## Init
 
