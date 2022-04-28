@@ -2,6 +2,8 @@
 
 
 use Bitrix\Iblock\IblockTable;
+use Bitrix\Iblock\SectionTable;
+use Bitrix\Iblock\SectionElementTable;
 use Bitrix\Iblock\PropertyTable;
 use Bitrix\Iblock\ElementPropertyTable;
 use Bitrix\Iblock\PropertyEnumerationTable;
@@ -11,6 +13,10 @@ use Unlock\Iblock\ElementUnlockedTable;
 $data     = Customer\Variable::DATA;
 $settings = Customer\Variable::SETTINGS;
 
+
+//
+// Update property
+//
 
 $itqex1 = IblockTable::query()
     ->setFilter(['CODE' => $settings['CODE']])
@@ -130,5 +136,64 @@ foreach ($data['property']['list'] as $property)      // $el
             }
 
         }
+    }
+}
+
+
+//
+// Update section
+//
+
+$codeListSection = [];
+foreach ($data['section']['element'] as $section)
+{
+    array_push($codeListSection, $section['SECTION_CODE']);
+}
+
+$idListSection = [];
+$stqex1 = SectionTable::query()
+    ->setFilter(['CODE' => $codeListSection])
+    ->setSelect(['ID', 'CODE'])
+    ->exec();
+while ($stqex1row = $stqex1->fetch())
+{
+    $idListSection[$stqex1row['CODE']] = $stqex1row['ID'];
+}
+
+$idListElementSection = [];
+$setqex1 = SectionElementTable::query()
+    ->setSelect(['IBLOCK_ELEMENT_ID', 'IBLOCK_SECTION_ID'])->exec();
+while ($setqex1row = $setqex1->fetch())
+{
+    $idListElementSection[$setqex1row['IBLOCK_ELEMENT_ID']] = $setqex1row['IBLOCK_SECTION_ID'];
+}
+
+foreach ($data['section']['element'] as $section)
+{
+    $idListElement = explode(" ", $section['ELEMENTS_ID']);
+
+    foreach ($idListElement as $idElement)
+    {
+        $idElement = intval(trim($idElement));
+        if($idElement == 0) { continue; }
+
+        $itu1 = ElementUnlockedTable::getByPrimary($idElement)->fetchObject();
+        $itu1result = $itu1 ->setIblockSectionId($idListSection[$section['SECTION_CODE']])
+                            ->setInSections('Y')
+                            ->save();
+
+        if(in_array($idElement, array_keys($idListElementSection)))
+        {
+            $setd1 = SectionElementTable::getByPrimary([
+                'IBLOCK_SECTION_ID' => $idListElementSection[$idElement],
+                'IBLOCK_ELEMENT_ID' => $idElement,
+            ])->fetchObject();
+            $setd1result = $setd1->delete();
+        }
+
+        $seta1 = SectionElementTable::createObject();
+        $seta1result =$seta1->setIblockSectionId($idListSection[$section['SECTION_CODE']])
+            ->setIblockElementId($idElement)
+            ->save();
     }
 }

@@ -235,14 +235,14 @@ class Data
                 'NAME'      => 'Металл',
                 'FIELD'     => self::FIELD,
                 'MESSAGE'   => self::MESSAGE,
-                'SECTION' => [
-                    [   // section 1
-                        'NAME' => ''
-                    ],  // section 1
-                    [   // section 2
-                        'NAME' => ''
-                    ],  // section 2
-                ],
+//                'SECTION' => [
+//                    [   // section 1
+//                        'NAME' => ''
+//                    ],  // section 1
+//                    [   // section 2
+//                        'NAME' => ''
+//                    ],  // section 2
+//                ],
                 'SETTINGS'  => [
                     'SITE_ID'   => 's1',
                     'ACTIVE'    => 'Y',
@@ -277,14 +277,14 @@ class Data
                 'NAME'      => 'Бетон',
                 'FIELD'     => self::FIELD,
                 'MESSAGE'   => self::MESSAGE,
-                'SECTION' => [
-                    [   // section 1
-                        'NAME' => ''
-                    ],  // section 1
-                    [   // section 2
-                        'NAME' => ''
-                    ],  // section 2
-                ],
+//                'SECTION' => [
+//                    [   // section 1
+//                        'NAME' => ''
+//                    ],  // section 1
+//                    [   // section 2
+//                        'NAME' => ''
+//                    ],  // section 2
+//                ],
                 'SETTINGS'  => [
                     'SITE_ID'   => 's1',
                     'ACTIVE'    => 'Y',
