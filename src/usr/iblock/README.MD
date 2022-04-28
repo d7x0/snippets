@@ -35,6 +35,22 @@ php exec.php \
     --pathToData "usr/iblock/init_container.php"
 ```
 
+**Property**
+
+```shell
+php exec.php \
+    --moduleName "iblock" --apiType "new" \
+    --pathToData "usr/iblock/init_property.php"
+```
+
+**Section**
+
+```shell
+php exec.php \
+    --moduleName "iblock" --apiType "new" \
+    --pathToData "usr/iblock/init_section.php"
+```
+
 **Element**
 
 ```shell
