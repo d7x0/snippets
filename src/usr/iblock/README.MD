@@ -97,7 +97,7 @@ php exec.php \
 
 ## Fetch
 
-**Property**
+**Section**
 
 ```shell
 php exec.php \
