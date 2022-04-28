@@ -48,7 +48,7 @@ php exec.php \
 ```shell
 php exec.php \
     --moduleName "iblock" --apiType "new" \
-    --pathToData "usr/iblock/init_section.php"
+    --pathToData "usr/iblock/init_section_$num.php"
 ```
 
 **Element**
