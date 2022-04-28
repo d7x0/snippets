@@ -8,14 +8,12 @@ use Bitrix\Iblock\PropertyEnumerationTable;
 use Unlock\Iblock\ElementUnlockedTable;
 
 
-$data = Customer\Data::DATA;
-
-$container = $data['container'];
-$element   = $data['element'];       // list
+$data     = Customer\Variable::DATA;
+$settings = Customer\Variable::SETTINGS;
 
 
 $itqex1 = IblockTable::query()
-    ->setFilter(['CODE' => $container['CODE']])
+    ->setFilter(['CODE' => $settings['CODE']])
     ->setSelect(['ID']);
 $itqex1result1 = $itqex1->exec()->fetch();
 $iblockId = $itqex1result1['ID'];                               // get iblock id
@@ -32,12 +30,9 @@ while ($ptqex1row = $ptqex1result1->fetch())
 }
 
 
-$eldefault
-    = $element['default'];
-
-if($eldefault['parameters']['SET_PROPERTY_FOR_ALL_EXIST_ELEMENT'] == 'Y')
+if($settings['MODE']['SET_PROPERTY_FOR_ALL_EXIST_ELEMENT'] == 'Y')
 {
-    $element['list'] = [];
+    $data['property']['list'] = [];
     $idListElement   = [];
     $etqex1 = ElementUnlockedTable::query()
         ->setFilter(['IBLOCK_ID' => $iblockId])
@@ -45,16 +40,16 @@ if($eldefault['parameters']['SET_PROPERTY_FOR_ALL_EXIST_ELEMENT'] == 'Y')
     $etqex1result1 = $etqex1->exec();
     while ($etqex1row = $etqex1result1->fetch())
     {
-        array_push($element['list'], [
+        array_push($data['property']['list'], [
             'ID'       => intval($etqex1row['ID']),
-            'PROPERTY' => $eldefault['PROPERTY']
+            'PROPERTY' => $data['property']['default']['PROPERTY']
         ]);
     }
 }
 
-foreach ($element['list'] as $el)
+foreach ($data['property']['list'] as $property)      // $el
 {
-    if(is_string($el['ID']))
+    if(is_string($property['ID']))
     {
         dump('ID must ba a Integer type, check DATA constant');
         break;
@@ -63,7 +58,7 @@ foreach ($element['list'] as $el)
     // get enum id
     $eptglex1pres = [];
     $eptglex1prq = ElementPropertyTable::getList([
-        'filter' => ['IBLOCK_ELEMENT_ID'  => $el['ID']],
+        'filter' => ['IBLOCK_ELEMENT_ID'  => $property['ID']],
         'select' => ['IBLOCK_PROPERTY_ID', 'ID']
     ]);
     while($eptglex1prrow = $eptglex1prq->fetch())
@@ -83,54 +78,54 @@ foreach ($element['list'] as $el)
     }
 
 
-    foreach ($el['PROPERTY'] as $elpropertycode => $elpropertyvalue)
+    foreach ($property['PROPERTY'] as $propertycode => $propertyvalue)
     {
-        $elPrId              = empty($eptglex1pres) ? null : $eptglex1pres[$ptqex1data[$elpropertycode]['ID']];
-        $elpropertyvalueEnum = empty($petglex1res)  ? null : $petglex1res[$ptqex1data[$elpropertycode]['ID']][$elpropertyvalue];
+        $propertyid              = empty($eptglex1pres) ? null : $eptglex1pres[$ptqex1data[$propertycode]['ID']];
+        $propertyvalueEnum = empty($petglex1res)  ? null : $petglex1res[$ptqex1data[$propertycode]['ID']][$propertyvalue];
 
-        if($ptqex1data[$elpropertycode]['PROPERTY_TYPE'] == 'S')
+        if($ptqex1data[$propertycode]['PROPERTY_TYPE'] == 'S')
         {
-            if(is_null($elPrId))
+            if(is_null($propertyid))
             {
                 $itu1 = ElementPropertyTable::createObject();
-                $itu1result = $itu1 ->setIblockElementId($el['ID'])
-                                    ->setIblockPropertyId($ptqex1data[$elpropertycode]['ID'])
-                                    ->setValue($elpropertyvalue)
+                $itu1result = $itu1 ->setIblockElementId($property['ID'])
+                                    ->setIblockPropertyId($ptqex1data[$propertycode]['ID'])
+                                    ->setValue($propertyvalue)
                                     ->setValueEnum(null)
                                     ->save();
             }
             else
             {
-                $itu1 = ElementPropertyTable::getByPrimary($elPrId)->fetchObject();
-                $itu1result = $itu1 ->setValue($elpropertyvalue)
+                $itu1 = ElementPropertyTable::getByPrimary($propertyid)->fetchObject();
+                $itu1result = $itu1 ->setValue($propertyvalue)
                                     ->setValueEnum(null)
                                     ->save();
             }
         }
 
-        if($ptqex1data[$elpropertycode]['PROPERTY_TYPE'] == 'L')
+        if($ptqex1data[$propertycode]['PROPERTY_TYPE'] == 'L')
         {
-            if(is_null($elPrId))
+            if(is_null($propertyid))
             {
-                // get $elpropertyvalueEnum by value
+                // get $propertyvalueEnum by value
                 $petglex1   = PropertyEnumerationTable::query();
-                $petglex1  ->setFilter(['VALUE' => $elpropertyvalue])
+                $petglex1  ->setFilter(['VALUE' => $propertyvalue])
                             ->setSelect(['ID']);
                 $petglex1res = $petglex1->exec()->fetch();
-                $elpropertyvalueEnum = $petglex1res['ID'];
+                $propertyvalueEnum = $petglex1res['ID'];
 
                 $itu1 = ElementPropertyTable::createObject();
-                $itu1result = $itu1 ->setIblockElementId($el['ID'])
-                                    ->setIblockPropertyId($ptqex1data[$elpropertycode]['ID'])
-                                    ->setValue($elpropertyvalueEnum)
-                                    ->setValueEnum($elpropertyvalueEnum)
+                $itu1result = $itu1 ->setIblockElementId($property['ID'])
+                                    ->setIblockPropertyId($ptqex1data[$propertycode]['ID'])
+                                    ->setValue($propertyvalueEnum)
+                                    ->setValueEnum($propertyvalueEnum)
                                     ->save();
             }
             else
             {
-                $itu1 = ElementPropertyTable::getByPrimary($elPrId)->fetchObject();
-                $itu1result = $itu1 ->setValue($elpropertyvalueEnum)
-                                    ->setValueEnum($elpropertyvalueEnum)
+                $itu1 = ElementPropertyTable::getByPrimary($propertyid)->fetchObject();
+                $itu1result = $itu1 ->setValue($propertyvalueEnum)
+                                    ->setValueEnum($propertyvalueEnum)
                                     ->save();
             }
 

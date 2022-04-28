@@ -4,19 +4,21 @@
 namespace Customer;
 
 
-class Data
+class Variable
 {
-    const DATA = [
-        'container' => [
-            'CODE' => 'supplier-steel',
+    const SETTINGS = [
+        'CODE' => 'supplier-steel',
+        'MODE' => [
+            'SET_PROPERTY_FOR_ALL_EXIST_ELEMENT'  => 'Y',
+            'SET_PROPERTY_FOR_ELEMENT_IN_SECTION' => 'supplier-steel-siberia',
+            'SET_PROPERTY_FOR_ELEMENT_IN_RANGE'   => '160 - 180',
+            'SET_PROPERTY_FOR_ELEMENT_IN_ENUM'    => '11, 12',
         ],
-        'element' => [
+    ];
+
+    const DATA = [
+        'property' => [
             'default' => [
-                'parameters' => [
-                    'SET_PROPERTY_FOR_ALL_EXIST_ELEMENT'  => 'Y',
-                    'SET_PROPERTY_FOR_ELEMENT_IN_SECTION' => 'supplier-steel-siberia',
-                    'SET_PROPERTY_FOR_ELEMENT_IN_RANGE'   => '160 - 180',
-                ],
                 'PROPERTY' => [
                     'PAYMENT_TYPE' => 'PAYMENT_TYPE_CARD',
                     'PAYMENT_BANK' => 'ПАО Банк «ФК Oткpытиe»'
@@ -36,6 +38,9 @@ class Data
                     ]
                 ],  // element 1
             ]
+        ],
+        'section' => [
+            'section-code' => 'parent-section-code',
         ]
     ];
 }
