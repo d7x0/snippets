@@ -25,8 +25,8 @@ class Data
                     'CODE' => 'country-russia',
                 ],  // element 1
                 [   // element 1
-                    'NAME' => 'Европа',
-                    'CODE' => 'region-europe',
+                    'NAME' => 'Азия',
+                    'CODE' => 'region-asia',
                 ],  // element 1
             ]
         ]
