@@ -40,7 +40,6 @@ class Variable
             ]
         ],
         'section' => [
-
             'element' => [
                 [
                     'SECTION_CODE' => 'supplier-steel-ural',        // 17
