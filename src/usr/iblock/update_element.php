@@ -43,15 +43,15 @@ class Variable
             'element' => [
                 [
                     'SECTION_CODE' => 'supplier-steel-ural',        // 17
-                    'ELEMENTS_ID'   => '395 398'
+                    'ELEMENTS_ID'   => '319 '
                 ],
                 [
                     'SECTION_CODE' => 'supplier-steel-europe',      // 16
-                    'ELEMENTS_ID'   => '396 '
+                    'ELEMENTS_ID'   => '320 322 '
                 ],
                 [
                     'SECTION_CODE' => 'supplier-steel-siberia',     // 18
-                    'ELEMENTS_ID'   => '397 '
+                    'ELEMENTS_ID'   => '321 '
                 ]
             ],
             'section' => [  // experimental, issue: DEPTH_LEVEL, LEFT_MARGIN, RIGHT_MARGIN

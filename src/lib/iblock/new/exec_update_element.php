@@ -175,7 +175,7 @@ foreach ($data['section']['element'] as $section)
     foreach ($idListElement as $idElement)
     {
         $idElement = intval(trim($idElement));
-        if($idElement == 0) { continue; }
+        if(empty($idElement)) { continue; }
 
         $itu1 = ElementUnlockedTable::getByPrimary($idElement)->fetchObject();
         $itu1result = $itu1 ->setIblockSectionId($idListSection[$section['SECTION_CODE']])
