@@ -6,8 +6,8 @@ namespace Customer;
 
 /*
     php exec.php \
-    --moduleName "iblock" --apiType "new" \
-    --pathToData "usr/iblock/fetch_section.php"
+        --moduleName "iblock" --apiType "new" \
+        --pathToData "usr/iblock/fetch_section.php"
 */
 class Data
 {

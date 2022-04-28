@@ -22,27 +22,25 @@ foreach ($listIblock as $iblock)
     dump('iblock: ' . $iblock['NAME']);
     dump('    id: ' . $iblock['ID']);
     dump('    section:');
-    //    offset
-    dump('        Code:                                     Id:     Parent Id:    Name:');
 
     $sectionListExist = [];
     $stqex1q = SectionTable::query()                             // get existing sections
         ->setFilter(['IBLOCK_ID' => $iblock['ID']])
         ->setSelect(['ID', 'IBLOCK_SECTION_ID', 'CODE', 'NAME'])->exec();
+    $stqex1res = $stqex1q->fetchAll();
 
-
-    $mask = "           %-34.24s        %-4.4s    %-7.4s       %-24.24s" . PHP_EOL;
-
-
-    if($stqex1q->fetch() == false)
+    if(empty($stqex1res))
     {
         print "           Нет разделов" .PHP_EOL;
+        continue;
     }
 
-    while ($stqex1row = $stqex1q->fetch())
+    $mask = "           %-41.39s %-4.4s %-16.8s %-32.32s" . PHP_EOL;
+    dump('        Code:                                     Id:     Parent Id:    Name:');
+    foreach ($stqex1res as $stqex1row)
     {
         printf($mask, $stqex1row['CODE'], $stqex1row['ID'], $stqex1row['IBLOCK_SECTION_ID'], $stqex1row['NAME']);
-    };
+    }
 }
 
 
