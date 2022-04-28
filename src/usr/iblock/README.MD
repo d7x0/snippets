@@ -45,6 +45,8 @@ php exec.php \
 
 **Section**
 
+> replace `$num` to available file number
+
 ```shell
 php exec.php \
     --moduleName "iblock" --apiType "new" \
