@@ -141,7 +141,7 @@ foreach ($data['property']['list'] as $property)      // $el
 
 
 //
-// Update section
+// Update section element
 //
 
 $codeListSection = [];
@@ -195,5 +195,37 @@ foreach ($data['section']['element'] as $section)
         $seta1result =$seta1->setIblockSectionId($idListSection[$section['SECTION_CODE']])
             ->setIblockElementId($idElement)
             ->save();
+    }
+}
+
+
+//
+// Update section section
+//
+
+$idListSection = [];
+$stqex1 = SectionTable::query()
+    ->setFilter(['IBLOCK_ID' => $iblockId])
+    ->setSelect(['ID', 'CODE'])
+    ->exec();
+while ($stqex1row = $stqex1->fetch())
+{
+    $idListSection[$stqex1row['CODE']] = $stqex1row['ID'];
+}
+
+$connection = \Bitrix\Main\Application::getConnection();
+
+foreach ($data['section']['section'] as $codeSectionParent => $codeListSectionChild)
+{
+    foreach ($codeListSectionChild as $codeSectionChild)
+    {
+        $idSectionChild  = intval($idListSection[$codeSectionChild]);
+        $idSectionParent = intval($idListSection[$codeSectionParent]);
+
+        $queryResponse = $connection->query("
+            UPDATE b_iblock_section
+            SET IBLOCK_SECTION_ID = $idSectionParent, DEPTH_LEVEL = 2
+            WHERE ID = $idSectionChild
+        ");
     }
 }

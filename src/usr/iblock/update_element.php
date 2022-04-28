@@ -54,8 +54,13 @@ class Variable
                     'ELEMENTS_ID'   => '397 '
                 ]
             ],
-            'section' => [
-                'section-code' => 'parent-section-code',
+            'section' => [  // experimental, issue: DEPTH_LEVEL, LEFT_MARGIN, RIGHT_MARGIN
+                'supplier-steel-country-russia' => [
+                    'supplier-steel-europe',
+                    'supplier-steel-ural',
+                    'supplier-steel-siberia',
+                    'supplier-steel-east'
+                ],
             ]
         ]
     ];
