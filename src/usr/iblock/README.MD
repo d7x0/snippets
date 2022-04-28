@@ -95,3 +95,12 @@ php exec.php \
     --pathToData "usr/iblock/delete_element.php"
 ```
 
+## Fetch
+
+**Property**
+
+```shell
+php exec.php \
+    --moduleName "iblock" --apiType "new" \
+    --pathToData "usr/iblock/fetch_section.php"
+
