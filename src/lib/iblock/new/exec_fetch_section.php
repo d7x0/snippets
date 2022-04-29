@@ -35,7 +35,7 @@ foreach ($listIblock as $iblock)
         continue;
     }
 
-    $mask = "           %-41.39s %-4.4s %-16.8s %-32.32s" . PHP_EOL;
+    $mask = "           %-41.32s %-7.4s %-13.4s %-32.32s" . PHP_EOL;
     dump('        Code:                                     Id:     Parent Id:    Name:');
     foreach ($stqex1res as $stqex1row)
     {
