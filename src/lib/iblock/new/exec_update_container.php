@@ -35,18 +35,26 @@ while ($ptqex1row = $ptqex1result1->fetch())
     $p = $container['PROPERTY']['property'];
 foreach ($container['PROPERTY']['list'] as $property)
 {
-    if($property['SETTINGS']['PROPERTY_TYPE'] == 'L')
+    switch ($property['SETTINGS']['PROPERTY_TYPE'])
     {
-        foreach($property['SETTINGS']['PROPERTY_ENUM'] as $propenum)
-        {
-            $xmlId = md5($property['CODE'] . $propenum['VALUE']);
-            $petaex1result  = PropertyEnumerationTable::createObject()
-                ->setPropertyId($ptqex1data[$property['CODE']])
-                ->setSort($propenum['SORT'])
-                ->setDef($propenum['DEF'])
-                ->setValue($propenum['VALUE'])
-                ->setXmlId($xmlId)
-                ->save();
-        }
+        case 'L':
+            foreach($property['SETTINGS']['PROPERTY_ENUM'] as $propenum)
+            {
+                $xmlId = md5($property['CODE'] . $propenum['VALUE']);
+                $petaex1result  = PropertyEnumerationTable::createObject()
+                    ->setPropertyId($ptqex1data[$property['CODE']])
+                    ->setSort($propenum['SORT'])
+                    ->setDef($propenum['DEF'])
+                    ->setValue($propenum['VALUE'])
+                    ->setXmlId($xmlId)
+                    ->save();
+            }
+            break;
+        case 'S' :
+        case 'N' :
+                $ptu1  = PropertyTable::getByPrimary($ptqex1data[$property['CODE']])->fetchObject();
+                $petaex1result = $ptu1->setPropertyType($property['SETTINGS']['PROPERTY_TYPE'])
+                                      ->save();
+            break;
     }
 }

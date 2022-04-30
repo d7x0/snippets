@@ -4,6 +4,11 @@
 namespace Customer;
 
 
+/*
+    php exec.php \
+        --moduleName "iblock" --apiType "new" \
+        --pathToData "usr/iblock/update_container.php"
+*/
 class Data
 {
     const DATA = [
@@ -16,7 +21,7 @@ class Data
                     ]
                 ],
                 'list' => [
-                    [   // element 1
+                    [   // property 1
                         'CODE' => 'PAYMENT_TYPE',
                         'SETTINGS' => [
                             'PROPERTY_TYPE' => 'L',
@@ -33,7 +38,13 @@ class Data
                                 ],
                             ]
                         ]
-                    ],  // element 1
+                    ],  // property 1
+                    [   // property 2
+                        'CODE' => 'ORDER_COST_MINIMUM',
+                        'SETTINGS' => [
+                            'PROPERTY_TYPE' => 'N',
+                        ]
+                    ],  // property 2
                 ]
             ]
         ]

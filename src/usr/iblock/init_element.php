@@ -4,6 +4,11 @@
 namespace Customer;
 
 
+/*
+    php exec.php \
+        --moduleName "iblock" --apiType "new" \
+        --pathToData "usr/iblock/init_element.php"
+*/
 class Data
 {
     const DATA = [

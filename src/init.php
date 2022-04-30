@@ -27,4 +27,4 @@ while (ob_get_level()) { /* цикл, который сбросит все бу�
 }
 
 
-require_once 'lib/iblock/ElementTableUnlocked.php';
+require_once 'lib/iblock/ElementUnlockedTable.php';
