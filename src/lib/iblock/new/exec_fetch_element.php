@@ -56,7 +56,7 @@ $queryResponse = $connection->query("
                 WHERE CODE LIKE '$iblockCode'
             )
         ")->fetchAll(); // возвращает элементы со всеми свойствами у которых свойство
-                        // SHIPMENT_ON_DAY_PAY = SHIPMENT_ON_DAY_PAY_ENABLE
+                        // $propertyFilterName = $propertyFilterValue
 
 $etqex11data = [];
 foreach ($queryResponse as $row)
@@ -86,4 +86,83 @@ foreach ($queryResponse as $row)
     $etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']]['VALUE'] = $row[$valueType];
 }
 
-dump($etqex11data);
+dump($etqex11data);  /*
+
+     ^ array:2 [
+          319 => array:4 [
+            "PROPERTY" => array:8 [
+              "ORDER_COST_MINIMUM" => array:2 [
+                "NAME" => "Минимальная сумма заказа"
+                "VALUE" => "100.0000"
+              ]
+              "ORDER_MUNUFACTURE_TIME" => array:2 [
+                "NAME" => "Время изготовления заказа"
+                "VALUE" => "144 часа"
+              ]
+              "PAYMENT_TYPE" => array:2 [
+                "NAME" => "Форма оплаты"
+                "VALUE" => "57"
+              ]
+              "PAYMENT_BANK" => array:2 [
+                "NAME" => "Банк оплаты"
+                "VALUE" => "ПАО Банк «ФК Oткpытиe»"
+              ]
+              "SHIPMENT_ON_DAY_PAY" => array:2 [
+                "NAME" => "Отгрузка в день оплаты"
+                "VALUE" => "42"
+              ]
+              "PAYMENT_DEFERMENT" => array:2 [
+                "NAME" => "Отсрочка платежа"
+                "VALUE" => "43"
+              ]
+              "DELIVERY_TYPE_AVAILABLE" => array:2 [
+                "NAME" => "Вид транспорта для доставки"
+                "VALUE" => "44"
+              ]
+              "DELIVERY_WEIGHT_LIMIT" => array:2 [
+                "NAME" => "Максимальный вес доставки"
+                "VALUE" => "200.0000"
+              ]
+            ]
+            "IBLOCK_ID" => "7"
+            "IBLOCK_NAME" => "Металл"
+            "NAME" => "Уральская литейная компания"
+          ]
+          322 => array:4 [
+            "PROPERTY" => array:7 [
+              "ORDER_COST_MINIMUM" => array:2 [
+                "NAME" => "Минимальная сумма заказа"
+                "VALUE" => "50.0000"
+              ]
+              "ORDER_MUNUFACTURE_TIME" => array:2 [
+                "NAME" => "Время изготовления заказа"
+                "VALUE" => "72 часа"
+              ]
+              "PAYMENT_TYPE" => array:2 [
+                "NAME" => "Форма оплаты"
+                "VALUE" => "56"
+              ]
+              "PAYMENT_BANK" => array:2 [
+                "NAME" => "Банк оплаты"
+                "VALUE" => "ПАО Банк «ФК Oткpытиe»"
+              ]
+              "SHIPMENT_ON_DAY_PAY" => array:2 [
+                "NAME" => "Отгрузка в день оплаты"
+                "VALUE" => "42"
+              ]
+              "DELIVERY_TYPE_AVAILABLE" => array:2 [
+                "NAME" => "Вид транспорта для доставки"
+                "VALUE" => "46"
+              ]
+              "DELIVERY_WEIGHT_LIMIT" => array:2 [
+                "NAME" => "Максимальный вес доставки"
+                "VALUE" => "500.0000"
+              ]
+            ]
+            "IBLOCK_ID" => "7"
+            "IBLOCK_NAME" => "Металл"
+            "NAME" => "ООО "ЛАЗЕРВЕРК""
+          ]
+        ]
+*/
+
