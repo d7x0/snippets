@@ -44,7 +44,11 @@ $queryResponse = $connection->query("
                     FROM b_iblock_property
                     WHERE CODE LIKE '$propertyFilterName'
                 )
-                AND VALUE = '$propertyFilterValue'
+                AND VALUE IN (
+                    SELECT ID AS ID
+                    FROM b_iblock_property_enum
+                    WHERE VALUE LIKE'$propertyFilterValue'
+                )
             )
             AND IE.IBLOCK_ID IN (
                 SELECT ID AS IBLOCK_ID
