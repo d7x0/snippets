@@ -55,7 +55,8 @@ $queryResponse = $connection->query("
                 FROM b_iblock
                 WHERE CODE LIKE '$iblockCode'
             )
-        ")->fetchAll();
+        ")->fetchAll(); // возвращает элементы со всеми свойствами у которых свойство
+                        // SHIPMENT_ON_DAY_PAY = SHIPMENT_ON_DAY_PAY_ENABLE
 
 $etqex11data = [];
 foreach ($queryResponse as $row)
