@@ -15,9 +15,12 @@ class Data
         'container' => [
             'CODE' => 'supplier-steel',
             'PROPERTY' => [
-                'property' => [
+                'default' => [
                     'L' => [
                         'DEF' => 'N',
+                    ],
+                    'N' => [
+
                     ]
                 ],
                 'list' => [
@@ -43,6 +46,7 @@ class Data
                         'CODE' => 'ORDER_COST_MINIMUM',
                         'SETTINGS' => [
                             'PROPERTY_TYPE' => 'N',
+
                         ]
                     ],  // property 2
                 ]

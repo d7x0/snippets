@@ -18,7 +18,10 @@ class Data
         'element' => [
             'element' => [
                 'PROPERTY' => [
-                    'FILTER_TEST_CODE' => 'Y'
+                    'single' => [
+                        'PROPERTY_NAME'  => 'SHIPMENT_ON_DAY_PAY',
+                        'PROPERTY_VALUE' => '42'
+                    ]
                 ]
             ]
         ]
