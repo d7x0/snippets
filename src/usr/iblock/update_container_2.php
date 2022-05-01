@@ -27,7 +27,7 @@ class Data
                             'PROPERTY_TYPE' => 'L',
                             'PROPERTY_ENUM' => [
                                 [
-                                    'VALUE' => 'Y',
+                                    'VALUE' => 'SHIPMENT_ON_DAY_PAY_ENABLE',
                                     'DEF' => 'N',
                                 ],
                             ]
@@ -39,7 +39,7 @@ class Data
                             'PROPERTY_TYPE' => 'L',
                             'PROPERTY_ENUM' => [
                                 [
-                                    'VALUE' => 'Y',
+                                    'VALUE' => 'PAYMENT_DEFERMENT_ENABLE',
                                     'DEF' => 'N',
                                 ],
                             ]

@@ -20,7 +20,7 @@ class Data
                 'PROPERTY' => [
                     'single' => [
                         'PROPERTY_NAME'  => 'SHIPMENT_ON_DAY_PAY',
-                        'PROPERTY_VALUE' => '42'
+                        'PROPERTY_VALUE' => 'SHIPMENT_ON_DAY_PAY_ENABLE'
                     ]
                 ]
             ]
