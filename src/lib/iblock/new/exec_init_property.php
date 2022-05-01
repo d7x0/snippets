@@ -32,18 +32,27 @@ while ($ptqex1row = $ptqex1q->fetch())
        = $container['PROPERTY']['default'];
 foreach ($container['PROPERTY']['list'] as $property)
 {
+    $property['ACTIVE'] = $propdefault['ACTIVE'];
+
+    $proptype = array_key_exists('PROPERTY_TYPE', $property)
+        ? $property['PROPERTY_TYPE'] : $propdefault['PROPERTY_TYPE'];
+    $property['PROPERTY_TYPE'] = $proptype;
+
+    $listtype = array_key_exists('LIST_TYPE', $property)
+        ? $property['LIST_TYPE'] : $propdefault['LIST_TYPE'];
+    $property['LIST_TYPE'] = $listtype;
+
+    $multiple = array_key_exists('MULTIPLE', $property)
+        ? $property['MULTIPLE'] : $propdefault['MULTIPLE'];
+    $property['MULTIPLE'] = $multiple;
+
+
     if(in_array($property['CODE'], $ptqex1data))
     {
         dump('Property with ID: "' . $property['CODE'] . '" already exist');
         dump('Property not created');
         continue;
     }
-
-    $proptype = array_key_exists('PROPERTY_TYPE', $property)
-        ? $property['PROPERTY_TYPE'] : $propdefault['PROPERTY_TYPE'];
-    $property['PROPERTY_TYPE'] = $proptype;
-    $property['ACTIVE'] = $propdefault['ACTIVE'];
-
 
     $pta1 = PropertyTable::createObject();
     $pta1result =  $pta1->setIblockId($iblockId)
