@@ -14,7 +14,7 @@ $options = getopt('ptc:ptd:', array(
 
 
 $nameFileData = substr($options['pathToData'], strripos($options['pathToData'], DIRECTORY_SEPARATOR) + 1);
-$nameFileAPI = substr_count($options['pathToData'], "_") == 2
+$nameFileAPI = substr_count($options['pathToData'], "_") >= 2
     ? substr($nameFileData, 0, strripos($nameFileData, "_")) . ".php"
     : $nameFileData;
 

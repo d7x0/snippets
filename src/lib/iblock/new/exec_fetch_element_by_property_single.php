@@ -39,19 +39,19 @@ $queryResponse = $connection->query("
             WHERE IBLOCK_ELEMENT_ID IN (
                 SELECT IBLOCK_ELEMENT_ID
                 FROM b_iblock_element_property
-                WHERE IBLOCK_PROPERTY_ID IN (
-                    SELECT ID AS IBLOCK_PROPERTY_ID
+                WHERE IBLOCK_PROPERTY_ID = (
+                    SELECT ID
                     FROM b_iblock_property
                     WHERE CODE LIKE '$propertyFilterName'
                 )
-                AND VALUE IN (
-                    SELECT ID AS ID
+                AND VALUE = (
+                    SELECT ID
                     FROM b_iblock_property_enum
                     WHERE VALUE LIKE'$propertyFilterValue'
                 )
             )
-            AND IE.IBLOCK_ID IN (
-                SELECT ID AS IBLOCK_ID
+            AND IE.IBLOCK_ID = (
+                SELECT ID
                 FROM b_iblock
                 WHERE CODE LIKE '$iblockCode'
             )
@@ -163,6 +163,4 @@ dump($etqex11data);  /*
             "IBLOCK_NAME" => "Металл"
             "NAME" => "ООО "ЛАЗЕРВЕРК""
           ]
-        ]
-*/
-
+        ] */
