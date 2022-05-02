@@ -7,7 +7,7 @@ namespace Customer;
 /*
     php exec.php \
         --moduleName "iblock" --apiType "new" \
-        --pathToData "usr/iblock/fetch_element_by_property_single_2.php"
+        --pathToData "usr/iblock/fetch_element_by_property_multiple_1.php"
 */
 class Data
 {
