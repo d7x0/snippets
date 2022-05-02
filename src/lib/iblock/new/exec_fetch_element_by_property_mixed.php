@@ -140,5 +140,4 @@ foreach ($queryResponse as $row)
     $etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']]['VALUE'] = $row[$valueType];
 }
 
-//dump($queryResponse);
 dump($etqex11data);
