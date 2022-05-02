@@ -7,7 +7,7 @@ namespace Customer;
 /*
     php exec.php \
         --moduleName "iblock" --apiType "new" \
-        --pathToData "usr/iblock/fetch_element_1.php"
+        --pathToData "usr/iblock/fetch_element_by_property_single_1.php"
 */
 class Data
 {
@@ -22,7 +22,7 @@ class Data
                         'PROPERTY_NAME'  => 'SHIPMENT_ON_DAY_PAY',
                         'PROPERTY_VALUE' => 'SHIPMENT_ON_DAY_PAY_ENABLE'
                     ]
-                ]
+                ],
             ]
         ]
     ];
