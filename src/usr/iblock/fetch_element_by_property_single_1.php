@@ -5,9 +5,12 @@ namespace Customer;
 
 
 /*
-    php exec.php \
-        --moduleName "iblock" --apiType "new" \
-        --pathToData "usr/iblock/fetch_element_by_property_single_1.php"
+    launch command:
+        php exec.php \
+            --moduleName "iblock" --apiType "new" \
+            --pathToData "usr/iblock/fetch_element_by_property_single_1.php"
+    processing code:
+        src/lib/iblock/new/exec_fetch_element_by_property_single.php
 */
 class Data
 {
