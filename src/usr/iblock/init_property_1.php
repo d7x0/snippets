@@ -18,6 +18,7 @@ class Data
                 'default' => [
                     'ACTIVE'        => 'Y',
                     'PROPERTY_TYPE' => 'S',
+                    'LIST_TYPE' => 'L',
                 ],
                 'list' => [
                     [   // element 1
@@ -32,6 +33,7 @@ class Data
                         'NAME' => 'Форма оплаты',
                         'CODE' => 'PAYMENT_TYPE',
                         'PROPERTY_TYPE' => 'L',
+                        'LIST_TYPE' => 'L',
                     ],  // element 3
                     [   // element 4
                         'NAME' => 'Банк оплаты',
