@@ -77,8 +77,8 @@ $queryResponse = $connection->query("
                 FROM b_iblock
                 WHERE CODE LIKE 'supplier-steel'
             )
-        ")->fetchAll(); // возвращает элементы со всеми свойствами у которых множественное свойство
-                        // $propertyFilterName = [$propertyFilterValue0, ..]
+        ")->fetchAll(); // возвращает элементы со всеми свойствами у которых
+                        // выбрано несколько значений множественнго свойства типа L
 
 $etqex11data = [];
 foreach ($queryResponse as $row)
