@@ -23,8 +23,8 @@ $iblockCode = $data['type']['CODE'];
 $property = $data['element']['element']['PROPERTY'];
 
 
-$propertyFilterName       = $property['single']['PROPERTY_NAME'];
-$arrayPropertyFilterValue = $property['single']['PROPERTY_VALUE'];
+$propertyFilterName       = $property['L']['PROPERTY_NAME'];
+$arrayPropertyFilterValue = $property['L']['PROPERTY_VALUE'];
 
     $stringPropertyFilterValue     = "";
     $stringPropertyFilterValueLike = "";
@@ -46,39 +46,42 @@ foreach ($arrayPropertyFilterValue as $arrayPropertyFilterValueItem)
     $stringPropertyFilterValueLike = trim(substr($stringPropertyFilterValueLike, 0 ,-4));
 
 
+$query = "
+    SELECT I.ID AS I_ID, I.NAME AS I_NAME,
+           IE.ID AS IE_ID, IE.NAME AS IE_NAME,
+           VALUE_NUM, VALUE,
+           IP.NAME AS IP_NAME, IP.ID AS IP_ID, IP.CODE AS IP_CODE
+    FROM b_iblock_element_property
+             LEFT JOIN b_iblock_element IE ON IBLOCK_ELEMENT_ID = IE.ID
+             LEFT JOIN b_iblock_property IP ON IBLOCK_PROPERTY_ID = IP.ID
+             LEFT JOIN b_iblock I ON IE.IBLOCK_ID = I.ID
+    WHERE IBLOCK_ELEMENT_ID IN (
+        SELECT RUNTIME_LIST_ELEMENT_ID.IEP_ELEMENT_ID
+        FROM
+            ( SELECT IEP.IBLOCK_ELEMENT_ID AS IEP_ELEMENT_ID, GROUP_CONCAT(IEP.VALUE SEPARATOR ', ') AS IEP_VALUE
+             FROM b_iblock_property_enum IPEN
+                      LEFT JOIN b_iblock_property IP ON IPEN.PROPERTY_ID = IP.ID
+                      LEFT JOIN b_iblock_element_property IEP ON IP.ID = IEP.IBLOCK_PROPERTY_ID
+             WHERE IP.IBLOCK_ID = (
+                    SELECT ID
+                    FROM b_iblock
+                    WHERE CODE LIKE 'supplier-steel'
+                )
+               AND IPEN.VALUE IN ($stringPropertyFilterValue)
+             GROUP BY IEP.IBLOCK_ELEMENT_ID ) AS RUNTIME_LIST_ELEMENT_ID
+        WHERE $stringPropertyFilterValueLike
+    )
+      AND IE.IBLOCK_ID = (
+        SELECT ID
+        FROM b_iblock
+        WHERE CODE LIKE 'supplier-steel'
+    )
+";
+
+
 $connection = Application::getConnection();
-$queryResponse = $connection->query(" 
-            SELECT I.ID AS I_ID, I.NAME AS I_NAME,
-                   IE.ID AS IE_ID, IE.NAME AS IE_NAME,
-                   VALUE_NUM, VALUE,
-                   IP.NAME AS IP_NAME, IP.ID AS IP_ID, IP.CODE AS IP_CODE
-            FROM b_iblock_element_property
-                     LEFT JOIN b_iblock_element IE ON IBLOCK_ELEMENT_ID = IE.ID
-                     LEFT JOIN b_iblock_property IP ON IBLOCK_PROPERTY_ID = IP.ID
-                     LEFT JOIN b_iblock I ON IE.IBLOCK_ID = I.ID
-            WHERE IBLOCK_ELEMENT_ID IN (
-                SELECT RUNTIME_LIST_ELEMENT_ID.IEP_ELEMENT_ID
-                FROM
-                    ( SELECT IEP.IBLOCK_ELEMENT_ID AS IEP_ELEMENT_ID, GROUP_CONCAT(IEP.VALUE SEPARATOR ', ') AS IEP_VALUE
-                     FROM b_iblock_property_enum IPEN
-                              LEFT JOIN b_iblock_property IP ON IPEN.PROPERTY_ID = IP.ID
-                              LEFT JOIN b_iblock_element_property IEP ON IP.ID = IEP.IBLOCK_PROPERTY_ID
-                     WHERE IP.IBLOCK_ID = (
-                            SELECT ID
-                            FROM b_iblock
-                            WHERE CODE LIKE 'supplier-steel'
-                        )
-                       AND IPEN.VALUE IN ($stringPropertyFilterValue)
-                     GROUP BY IEP.IBLOCK_ELEMENT_ID ) AS RUNTIME_LIST_ELEMENT_ID
-                WHERE $stringPropertyFilterValueLike
-            )
-              AND IE.IBLOCK_ID = (
-                SELECT ID
-                FROM b_iblock
-                WHERE CODE LIKE 'supplier-steel'
-            )
-        ")->fetchAll(); // возвращает элементы со всеми свойствами у которых
-                        // выбрано несколько значений множественнго свойства типа L
+$queryResponse = $connection->query($query)->fetchAll(); // возвращает элементы со всеми свойствами у которых
+                                                         // выбрано несколько значений множественнго свойства типа L
 
 $etqex11data = [];
 foreach ($queryResponse as $row)

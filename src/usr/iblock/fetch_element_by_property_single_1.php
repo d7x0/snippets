@@ -18,10 +18,14 @@ class Data
         'element' => [
             'element' => [
                 'PROPERTY' => [
-                    'single' => [
+                    'S' => [
                         [
-                            'PROPERTY_NAME'  => 'SHIPMENT_ON_DAY_PAY',
-                            'PROPERTY_VALUE' => 'SHIPMENT_ON_DAY_PAY_ENABLE'
+                            'PROPERTY_NAME'  => 'ORDER_MUNUFACTURE_TIME',
+                            'PROPERTY_VALUE' => '72 часа'
+                        ],
+                        [
+                            'PROPERTY_NAME'  => 'DELIVERY_WEIGHT_LIMIT',
+                            'PROPERTY_VALUE' => '500 тонн'
                         ]
                     ]
                 ],

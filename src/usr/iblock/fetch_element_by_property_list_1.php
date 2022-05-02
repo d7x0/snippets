@@ -7,7 +7,7 @@ namespace Customer;
 /*
     php exec.php \
         --moduleName "iblock" --apiType "new" \
-        --pathToData "usr/iblock/fetch_element_by_property_multiple_1.php"
+        --pathToData "usr/iblock/fetch_element_by_property_list_1.php"
 */
 class Data
 {
@@ -18,9 +18,9 @@ class Data
         'element' => [
             'element' => [
                 'PROPERTY' => [
-                    'single' => [
+                    'L' => [
                         'PROPERTY_NAME'  => 'DELIVERY_TYPE_AVAILABLE',
-                        'PROPERTY_VALUE' => ['AIRPLANE', 'SEMI_TRUCK']      // [46, 47]
+                        'PROPERTY_VALUE' => ['AIRPLANE', 'SEMI_TRUCK']
                     ]
                 ],
             ]
