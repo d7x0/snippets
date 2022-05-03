@@ -12,20 +12,25 @@ foreach ($property['L'] as $arrayPropertyFilterValueItem)
 {
     foreach ($arrayPropertyFilterValueItem['PROPERTY_VALUE'] as $propertyEnumItem)
     {
+        $propertyName = $arrayPropertyFilterValueItem['PROPERTY_NAME'];
         $stringPropertyFilterValue .= "'" . $propertyEnumItem . "', ";
 
         $like = "
             RUNTIME_LIST_ELEMENT_ID.IEP_VALUE LIKE CONCAT('%', (
                 SELECT ID
                 FROM b_iblock_property_enum
-                WHERE VALUE LIKE '$propertyEnumItem'
+                WHERE VALUE LIKE '$propertyEnumItem' AND PROPERTY_ID = (
+                    SELECT ID
+                    FROM b_iblock_property
+                    WHERE CODE LIKE '$propertyName'
+                )
             ), '%')
         ";
 
         $stringPropertyFilterValueLike .= $like . " AND "; }}
 
-$stringPropertyFilterValue = substr($stringPropertyFilterValue, 0 ,-2);
-$stringPropertyFilterValueLike = trim(substr($stringPropertyFilterValueLike, 0 ,-4));
+        $stringPropertyFilterValue = substr($stringPropertyFilterValue, 0 ,-2);
+        $stringPropertyFilterValueLike = trim(substr($stringPropertyFilterValueLike, 0 ,-4));
 
 
 // build query for S
@@ -49,7 +54,7 @@ foreach ($property['S'] as $propertyString)
     ";
 
     $stringPropertyFilterValueWhere .= $where . " AND "; }
-$stringPropertyFilterValueWhere = trim(substr($stringPropertyFilterValueWhere, 0 ,-4));
+    $stringPropertyFilterValueWhere = trim(substr($stringPropertyFilterValueWhere, 0 ,-4));
 
 
 $queryPartEnum = "
