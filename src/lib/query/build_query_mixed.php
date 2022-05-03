@@ -63,7 +63,7 @@ $queryPartEnum = "
              WHERE IP.IBLOCK_ID = (
                     SELECT ID
                     FROM b_iblock
-                    WHERE CODE LIKE 'supplier-steel'
+                    WHERE CODE LIKE '$iblockCode'
                 )
                AND IPEN.VALUE IN ($stringPropertyFilterValue)
              GROUP BY IEP.IBLOCK_ELEMENT_ID ) AS RUNTIME_LIST_ELEMENT_ID
@@ -110,7 +110,7 @@ $query = "
       AND IE.IBLOCK_ID = (
         SELECT ID
         FROM b_iblock
-        WHERE CODE LIKE 'supplier-steel'
+        WHERE CODE LIKE '$iblockCode'
     )
     ORDER BY IE.ID
 ";
