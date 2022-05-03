@@ -28,3 +28,5 @@ while (ob_get_level()) { /* цикл, который сбросит все бу�
 
 
 require_once 'lib/iblock/ElementUnlockedTable.php';
+require_once 'lib/iblock/PropertyCodeValueType.php';
+require_once 'lib/Writer.php';

@@ -15,6 +15,26 @@ namespace Customer;
 */
 class Data
 {
+    const MAP_PROPERTY_CODE_VALUE_TYPE = [
+        'TITLE'         => 'IEP_VALUE',
+        'KEYWORDS'      => 'IEP_VALUE',
+        'META_DESCRIPTION' => 'IEP_VALUE',
+        'BRAND_REF'     => 'IEP_VALUE',
+        'NEWPRODUCT'    => 'IPEN_VALUE',
+        'SALELEADER'    => 'IPEN_VALUE',
+        'SPECIALOFFER'  => 'IPEN_VALUE',
+        'ARTNUMBER'     => 'IEP_VALUE',
+        'MANUFACTURER'  => 'IEP_VALUE',
+        'MATERIAL'      => 'IEP_VALUE',
+        'COLOR'         => 'IEP_VALUE',
+        'MORE_PHOTO'    => 'IEP_VALUE',
+        'RECOMMEND'     => 'IEP_VALUE',
+        'BLOG_POST_ID'  => 'IEP_VALUE_NUM',
+        'BLOG_COMMENTS_CNT' => 'IEP_VALUE_NUM',
+        'BACKGROUND_IMAGE'  => 'IEP_VALUE',
+        'TREND'         => 'IPEN_VALUE',
+    ];
+
     const DATA = [
         'type' => [
             'CODE' => 'clothes',

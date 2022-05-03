@@ -27,7 +27,6 @@ $pathExec = "lib" . DIRECTORY_SEPARATOR . $options['moduleName']
 if(count($options) < 3)
 {
     dump('Command line argument count < 3. Operation aborted');
-    die;
 }
 
 $pathToData = trim($options['pathToData']);
@@ -35,4 +34,4 @@ $pathExec   = trim($pathExec);
 
 
 require_once $pathToData;
-require_once $pathExec;
+if(!empty($options['moduleName']) && !empty($options['apiType'])) { require_once $pathExec; }

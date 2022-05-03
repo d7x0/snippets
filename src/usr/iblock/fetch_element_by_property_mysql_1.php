@@ -15,6 +15,24 @@ namespace Customer;
 */
 class Data
 {
+    const MAP_PROPERTY_CODE_VALUE_TYPE = [
+        'ORDER_COST_MINIMUM'        => 'IEP_VALUE_NUM',     // N
+        'ORDER_MUNUFACTURE_TIME'    => 'IEP_VALUE',         // S
+        'PAYMENT_TYPE'              => 'IPEN_VALUE',        // L
+        'PAYMENT_BANK'              => 'IEP_VALUE',         // S
+
+        'SHIPMENT_ON_DAY_PAY'       => 'IPEN_VALUE',        // L
+        'PAYMENT_DEFERMENT'         => 'IPEN_VALUE',        // L
+        'DELIVERY_TYPE_AVAILABLE'   => 'IPEN_VALUE',        // L MULTIPLE
+        'DELIVERY_WEIGHT_LIMIT'     => 'IEP_VALUE_NUM',     // N
+
+        'FILE_CONTRACT_DELIVERY'        => 'IEP_VALUE',     // F
+        'FILE_CONTRACT_LIST_FORCEMAJOR' => 'IEP_VALUE',     // F MULTIPLE
+
+        'REFERENCE_TO_SUPPLIER_STEEL'            => 'IEP_VALUE',  // E MULTIPLE
+        'REFERENCE_TO_SECTION_SUPPLIER_CONCRETE' => 'IEP_VALUE',  // G MULTIPLE
+    ];
+
     const DATA = [
         'type' => [
             'CODE' => 'supplier-steel',

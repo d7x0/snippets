@@ -1,4 +1,4 @@
-<?php $data = Customer\Data::DATA;
+<?php
 
 
 $iblockCode = $data['type']['CODE'];
