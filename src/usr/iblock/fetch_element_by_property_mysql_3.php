@@ -46,24 +46,33 @@ class Data
             'element' => [
                 'PROPERTY' => [
                     'L' => [
-//                        [
-//                            'PROPERTY_NAME'  => 'SALELEADER',
-//                            'PROPERTY_VALUE' => ['да']
-//                        ],
-//                        [
-//                            'PROPERTY_NAME'  => 'NEWPRODUCT',
-//                            'PROPERTY_VALUE' => ['да']
-//                        ],
+                        [
+                            'PROPERTY_NAME'  => 'SALELEADER',
+                            'PROPERTY_VALUE' => ['да']
+                        ],
+                        [
+                            'PROPERTY_NAME'  => 'NEWPRODUCT',
+                            'PROPERTY_VALUE' => ['да']
+                        ],
                     ],
                     'S' => [
                         [
                             'PROPERTY_NAME'  => 'MATERIAL',
-                            'PROPERTY_VALUE' => 'трикотаж'
+                            'PROPERTY_VALUE' => [
+                                'трикотаж',
+                                '95% хлопок, 5% эластан',
+                                'искусственные материалы',
+                            ],
+                            'PROPERTY_VALUE_CONCAT_OPERATOR' => 'OR',
                         ],
-//                        [
-//                            'PROPERTY_NAME'  => 'MATERIAL',
-//                            'PROPERTY_VALUE' => '95% хлопок, 5% эластан',
-//                        ],
+                        [
+                            'PROPERTY_NAME'  => 'MANUFACTURER',
+                            'PROPERTY_VALUE' => [
+                                'Россия',
+                                'Китай',
+                            ],
+                            'PROPERTY_VALUE_CONCAT_OPERATOR' => 'OR',
+                        ],
                     ]
                 ],
             ]

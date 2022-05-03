@@ -52,4 +52,14 @@ foreach ($queryResponse as $row)
     $etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']]['NAME'] = $row['IP_NAME'];
 }
 
+
+$etqex11short = [];
+foreach ($etqex11data as $etqex11id => $etqex11item)
+{
+    $etqex11short[$etqex11id] = [
+        'NAME' => $etqex11item['NAME'],
+        'IBLOCK_SECTION_ID' => $etqex11item['IBLOCK_SECTION_ID'],
+    ];
+}
+
 dump($etqex11data);

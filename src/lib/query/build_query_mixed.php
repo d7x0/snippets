@@ -38,8 +38,16 @@ foreach ($property['L'] as $arrayPropertyFilterValueItem)
 $stringPropertyFilterValueWhere = "";
 foreach ($property['S'] as $propertyString)
 {
-    $propertyFilterName  = $propertyString['PROPERTY_NAME'];
-    $propertyFilterValue = $propertyString['PROPERTY_VALUE'];
+    $propertyFilterName     = $propertyString['PROPERTY_NAME'];
+    $propertyConcatOperator = $propertyString['PROPERTY_VALUE_CONCAT_OPERATOR'];
+
+    $propertyFilterValue = "";
+    foreach ($propertyString['PROPERTY_VALUE'] as $propertyValueString)
+    {
+        $propertyFilterValue .= "VALUE LIKE '%"
+                             . $propertyValueString . "%' "
+                             . $propertyConcatOperator . " "; }
+        $propertyFilterValue = substr($propertyFilterValue, 0 ,-1*(strlen($propertyConcatOperator) + 1));
 
     $where = "
         IE.ID IN (
@@ -50,7 +58,7 @@ foreach ($property['S'] as $propertyString)
                 FROM b_iblock_property
                 WHERE CODE LIKE '$propertyFilterName'
             )
-              AND VALUE LIKE '$propertyFilterValue'
+              AND $propertyFilterValue
         )
     ";
 
@@ -112,20 +120,19 @@ if(empty($stringCodeListSection))
     $stringSectionFilterValueLike = "";
 }
 
-if(empty($queryPartEnum) && empty($stringPropertyFilterValueWhere))
-{
-    dump('Not found properties in filter');
-    die;
-}
-
 
 $queryHeader = include __DIR__ . '/_query_header.php';
 $queryFooter = include __DIR__ . '/_query_footer.php';
+
+
+
+$queryFooterBegin =
+    (empty($queryPartEnum) && empty($stringPropertyFilterValueWhere)) ?  "    WHERE " : "    AND ";
 
 
 return "
     $queryHeader
         $queryPartEnum
         $stringPropertyFilterValueWhere
-    $queryFooter
+    $queryFooterBegin $queryFooter
 ";
