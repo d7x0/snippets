@@ -20,6 +20,9 @@ class Data
             'CODE' => 'supplier-steel',
         ],
         'element' => [
+            'section' => [
+                'CODE' => []
+            ],
             'element' => [
                 'PROPERTY' => [
                     'S' => [

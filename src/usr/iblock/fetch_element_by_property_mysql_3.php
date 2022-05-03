@@ -20,23 +20,30 @@ class Data
             'CODE' => 'clothes',
         ],
         'element' => [
+            'section' => [
+                'CODE' => ['t-shirts', 'sportswear']
+            ],
             'element' => [
                 'PROPERTY' => [
                     'L' => [
-                        [
-                            'PROPERTY_NAME'  => 'SALELEADER',
-                            'PROPERTY_VALUE' => ['да']
-                        ],
-                        [
-                            'PROPERTY_NAME'  => 'NEWPRODUCT',
-                            'PROPERTY_VALUE' => ['да']
-                        ],
+//                        [
+//                            'PROPERTY_NAME'  => 'SALELEADER',
+//                            'PROPERTY_VALUE' => ['да']
+//                        ],
+//                        [
+//                            'PROPERTY_NAME'  => 'NEWPRODUCT',
+//                            'PROPERTY_VALUE' => ['да']
+//                        ],
                     ],
                     'S' => [
                         [
                             'PROPERTY_NAME'  => 'MATERIAL',
-                            'PROPERTY_VALUE' => 'кожа'
+                            'PROPERTY_VALUE' => 'трикотаж'
                         ],
+//                        [
+//                            'PROPERTY_NAME'  => 'MATERIAL',
+//                            'PROPERTY_VALUE' => '95% хлопок, 5% эластан',
+//                        ],
                     ]
                 ],
             ]

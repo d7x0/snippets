@@ -24,7 +24,7 @@ $mapPropertyCodeValueType = [
 ];
 
 
-require_once __DIR__ . "/../../query/". $options['queryBuilder'] .".php";
+$query = include __DIR__ . "/../../query/". $options['queryBuilder'] .".php";
 
 $connection = Application::getConnection();
 $queryResponse = $connection->query($query)->fetchAll();
@@ -66,6 +66,7 @@ foreach ($queryResponse as $row)
     $etqex11data[$row['IE_ID']]['IBLOCK_ID']   = $row['I_ID'];
     $etqex11data[$row['IE_ID']]['IBLOCK_NAME'] = $row['I_NAME'];
     $etqex11data[$row['IE_ID']]['NAME']        = $row['IE_NAME'];
+    $etqex11data[$row['IE_ID']]['IBLOCK_SECTION_ID'] = $row['IE_IBLOCK_SECTION_ID'];
 
     $etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']]['NAME'] = $row['IP_NAME'];
 }
