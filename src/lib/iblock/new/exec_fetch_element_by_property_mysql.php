@@ -18,8 +18,7 @@ $mapPropertyCodeValueType = [
 require_once __DIR__ . "/../../query/". $options['queryBuilder'] .".php";
 
 $connection = Application::getConnection();
-$queryResponse = $connection->query($query)->fetchAll(); // возвращает элементы со всеми свойствами у которых
-                                                         // выбрано несколько значений множественнго свойства типа L
+$queryResponse = $connection->query($query)->fetchAll();
 
 $etqex11data = [];
 foreach ($queryResponse as $row)
