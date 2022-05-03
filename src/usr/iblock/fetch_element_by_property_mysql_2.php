@@ -46,11 +46,17 @@ class Data
                     'S' => [
                         [
                             'PROPERTY_NAME'  => 'ORDER_MUNUFACTURE_TIME',
-                            'PROPERTY_VALUE' => '72 часа'
+                            'PROPERTY_VALUE' => [
+                                '72 часа',
+                            ],
+                            'PROPERTY_VALUE_CONCAT_OPERATOR' => 'OR',
                         ],
                         [
                             'PROPERTY_NAME'  => 'DELIVERY_WEIGHT_LIMIT',
-                            'PROPERTY_VALUE' => '500 тонн'
+                            'PROPERTY_VALUE' => [
+                                '500 тонн'
+                            ],
+                            'PROPERTY_VALUE_CONCAT_OPERATOR' => 'OR',
                         ]
                     ]
                 ],

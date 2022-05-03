@@ -64,12 +64,18 @@ class Data
                     'S' => [
                         [
                             'PROPERTY_NAME'  => 'PAYMENT_BANK',
-                            'PROPERTY_VALUE' => 'ПАО Банк «ФК Oткpытиe»'
+                            'PROPERTY_VALUE' => [
+                                'ПАО Банк «ФК Oткpытиe»',
+                            ],
+                            'PROPERTY_VALUE_CONCAT_OPERATOR' => 'OR',
                         ],
                         [
                             'PROPERTY_NAME'  => 'DELIVERY_WEIGHT_LIMIT',
-                            'PROPERTY_VALUE' => '500 тонн'
-                        ],
+                            'PROPERTY_VALUE' => [
+                                '500 тонн'
+                            ],
+                            'PROPERTY_VALUE_CONCAT_OPERATOR' => 'OR',
+                        ]
                     ]
                 ],
             ]
