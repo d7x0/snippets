@@ -46,6 +46,10 @@ foreach ($container['PROPERTY']['list'] as $property)
         ? $property['MULTIPLE'] : $propdefault['MULTIPLE'];
     $property['MULTIPLE'] = $multiple;
 
+    $refIblock = array_key_exists('LINK_IBLOCK_ID', $property)
+        ? $property['LINK_IBLOCK_ID'] : $propdefault['LINK_IBLOCK_ID'];
+    $property['LINK_IBLOCK_ID'] = $refIblock;
+
 
     if(in_array($property['CODE'], $ptqex1data))
     {
@@ -60,6 +64,8 @@ foreach ($container['PROPERTY']['list'] as $property)
         ->setCode($property['CODE'])
         ->setActive($property['ACTIVE'])
         ->setPropertyType($property['PROPERTY_TYPE'])
+        ->setMultiple($property['MULTIPLE'])
+        ->setLinkIblockId($property['LINK_IBLOCK_ID'])
         ->save();
     $ptid = $pta1->getId();
 

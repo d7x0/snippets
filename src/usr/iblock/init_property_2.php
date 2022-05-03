@@ -19,7 +19,8 @@ class Data
                     'ACTIVE'        => 'Y',
                     'PROPERTY_TYPE' => 'L',
                     'LIST_TYPE'     => 'C',
-                    'MULTIPLE'      => 'N'
+                    'MULTIPLE'      => 'N',
+                    'LINK_IBLOCK_ID' => 0,
                 ],
                 'list' => [
                     [   // property 1

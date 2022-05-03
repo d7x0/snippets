@@ -19,6 +19,7 @@ class Data
                     'ACTIVE'        => 'Y',
                     'PROPERTY_TYPE' => 'S',
                     'LIST_TYPE' => 'L',
+                    'LINK_IBLOCK_ID' => 0,
                 ],
                 'list' => [
                     [   // element 1
