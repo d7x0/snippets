@@ -10,6 +10,7 @@ $options = getopt('ptc:ptd:', array(
     'moduleName:',
     'apiType:',
     'pathToData:',
+    'queryBuilder:',
 ));
 
 

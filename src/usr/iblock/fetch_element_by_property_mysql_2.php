@@ -8,9 +8,10 @@ namespace Customer;
     launch command:
         php exec.php \
             --moduleName "iblock" --apiType "new" \
-            --pathToData "usr/iblock/fetch_element_by_property_single_1.php"
+            --pathToData "usr/iblock/fetch_element_by_property_mysql_2.php" \
+            --queryBuilder "build_query_single"
     processing code:
-        src/lib/iblock/new/exec_fetch_element_by_property_single.php
+        src/lib/iblock/new/exec_fetch_element_by_property_mysql.php
 */
 class Data
 {
