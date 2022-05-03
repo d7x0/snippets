@@ -12,6 +12,9 @@ $mapPropertyCodeValueType = [
     'PAYMENT_DEFERMENT'         => 'IPEN_VALUE',        // L
     'DELIVERY_TYPE_AVAILABLE'   => 'IPEN_VALUE',        // L MULTIPLE
     'DELIVERY_WEIGHT_LIMIT'     => 'IEP_VALUE_NUM',     // N
+
+    'UPLOAD_CONTRACT_DELIVERY'        => 'IEP_VALUE',     // F
+    'UPLOAD_CONTRACT_LIST_FORCEMAJOR' => 'IEP_VALUE',     // F
 ];
 
 
@@ -20,9 +23,12 @@ require_once __DIR__ . "/../../query/". $options['queryBuilder'] .".php";
 $connection = Application::getConnection();
 $queryResponse = $connection->query($query)->fetchAll();
 
+
 $etqex11data = [];
 foreach ($queryResponse as $row)
 {
+    $valueType = $mapPropertyCodeValueType[$row['IP_CODE']];
+
     if(!is_array($etqex11data[$row['IE_ID']]))
     {
         $etqex11data[$row['IE_ID']] = [];
@@ -38,14 +44,24 @@ foreach ($queryResponse as $row)
         $etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']] = [];
     }
 
+    if($row['IP_MULTIPLE'] == 'Y')
+    {
+        if(!is_array($etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']]['VALUE']))
+        {
+            $etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']]['VALUE'] = []; }
+        array_push($etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']]['VALUE'], $row[$valueType]);
+    }
+    else
+    {
+        $etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']]['VALUE'] = $row[$valueType];
+    }
+
+
     $etqex11data[$row['IE_ID']]['IBLOCK_ID']   = $row['I_ID'];
     $etqex11data[$row['IE_ID']]['IBLOCK_NAME'] = $row['I_NAME'];
     $etqex11data[$row['IE_ID']]['NAME']        = $row['IE_NAME'];
 
     $etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']]['NAME'] = $row['IP_NAME'];
-
-    $valueType = $mapPropertyCodeValueType[$row['IP_CODE']];
-    $etqex11data[$row['IE_ID']]['PROPERTY'][$row['IP_CODE']]['VALUE'] = $row[$valueType];
 }
 
 dump($etqex11data);
